@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// A script to be added to a camera which causes it to follow a target
+/// within a specified rectangular bounds.
+/// </summary>
 public class CameraMovement : MonoBehaviour
 {
     [Tooltip("The target this camera follows.")]

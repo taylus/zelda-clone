@@ -1,5 +1,10 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// A "room transition" effect which causes the camera and player to adjust
+/// to new bounds and positions. Adjusting the camera's bounds will cause it
+/// to "snap" to the new room at a speed determined by its smoothing.
+/// </summary>
 [RequireComponent(typeof(BoxCollider2D))]
 public class RoomTransition : MonoBehaviour
 {
