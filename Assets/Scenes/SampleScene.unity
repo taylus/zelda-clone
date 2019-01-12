@@ -11353,9 +11353,10 @@ GameObject:
   - component: {fileID: 1369759298}
   - component: {fileID: 1369759300}
   - component: {fileID: 1369759299}
+  - component: {fileID: 1369759301}
   m_Layer: 5
-  m_Name: Text
-  m_TagString: Untagged
+  m_Name: DialogueSystem
+  m_TagString: DialogueSystem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11425,6 +11426,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1369759297}
   m_CullTransparentMesh: 0
+--- !u!114 &1369759301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369759297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf1884ec187c0343af7499d4447ae97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MessageBoxImageComponent: {fileID: 913417006}
+  SecondsBetweenCharacters: 0.1
 --- !u!1001 &1423468643
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11767,7 +11782,17 @@ PrefabInstance:
     - target: {fileID: 9050697951233084984, guid: c5fdc67fef47f5d479924a80113647f3,
         type: 3}
       propertyPath: Message
-      value: Shop ->
+      value: Super sales to the east!\nStop by and take a look!
       objectReference: {fileID: 0}
+    - target: {fileID: 9050697951233084984, guid: c5fdc67fef47f5d479924a80113647f3,
+        type: 3}
+      propertyPath: dialogueSystem
+      value: 
+      objectReference: {fileID: 1369759301}
+    - target: {fileID: 9050697951233084984, guid: c5fdc67fef47f5d479924a80113647f3,
+        type: 3}
+      propertyPath: DialogueSystem
+      value: 
+      objectReference: {fileID: 1369759301}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5fdc67fef47f5d479924a80113647f3, type: 3}

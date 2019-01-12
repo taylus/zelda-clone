@@ -1,16 +1,15 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
+/// <summary>
+/// An intractable sign the player can read if standing within its trigger.
+/// </summary>
 public class Sign : MonoBehaviour
 {
-    [Tooltip("A UI image to show/hide underneath the text.")]
-    public GameObject UIMessageBox;
-
-    [Tooltip("A UI text element to display the text.")]
-    public Text UIText;
-
-    [Tooltip("The string of text to display on the UI.")]
+    [Tooltip("The string of text to display.")]
     public string Message;
+
+    [Tooltip("The DialogueSystem script to use for displaying text.")]
+    public DialogueSystem DialogueSystem;
 
     private bool playerInRange;
 
@@ -18,14 +17,13 @@ public class Sign : MonoBehaviour
     {
         if (Input.GetButtonDown("Submit") && playerInRange)
         {
-            if (UIMessageBox.activeInHierarchy)
+            if (DialogueSystem.Visible)
             {
-                UIMessageBox.SetActive(false);
+                DialogueSystem.Hide();
             }
             else
             {
-                UIMessageBox.SetActive(true);
-                UIText.text = Message;
+                DialogueSystem.Show(Message);
             }
         }
     }
@@ -40,6 +38,6 @@ public class Sign : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
         playerInRange = false;
-        UIMessageBox.SetActive(false);
+        DialogueSystem.Hide();
     }
 }
