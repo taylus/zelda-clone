@@ -6,11 +6,14 @@ using UnityEngine.UI;
 /// Manages the game's message/dialogue system so that individual scripts for
 /// things like signs, NPCs, etc don't have to concern themselves with UI elements.
 /// </summary>
-[RequireComponent(typeof(Text))]
+[RequireComponent(typeof(Text), typeof(AudioSource))]
 public class DialogueSystem : MonoBehaviour
 {
     //the UI text component this script should be placed on
-    private Text TextComponent;
+    private Text textComponent;
+
+    //attached AudioSource for playing sound effects
+    private AudioSource audioSource;
 
     [Tooltip("A UI image component to show/hide underneath the text.")]
     public GameObject MessageBoxImageComponent;
@@ -21,12 +24,19 @@ public class DialogueSystem : MonoBehaviour
     [Tooltip("How long to wait in between displaying individual characters.")]
     public float SecondsBetweenCharacters = 0.1f;
 
+    [Tooltip("Sound to play when each character of the message is displayed.")]
+    public AudioClip CharacterShownSound;
+
+    [Tooltip("Sound to play when the entire message is displayed.")]
+    public AudioClip MessageCompleteSound;
+
     public bool Visible => MessageBoxImageComponent.activeInHierarchy;
 
     public void Awake()
     {
-        TextComponent = GetComponent<Text>();
-        TextComponent.text = "";
+        textComponent = GetComponent<Text>();
+        textComponent.text = "";
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void Show(string stringToDisplay)
@@ -46,14 +56,27 @@ public class DialogueSystem : MonoBehaviour
     /// </summary>
     private IEnumerator DisplayCharacters(string stringToDisplay)
     {
-        TextComponent.text = "";
-        for (int i = 0; i < stringToDisplay.Length; i++)
+        textComponent.text = "";
+        foreach (char c in stringToDisplay)
         {
-            TextComponent.text += stringToDisplay[i];
+            if (!char.IsWhiteSpace(c))
+            {
+                PlaySound(CharacterShownSound);
+            }
+            textComponent.text += c;
             yield return new WaitForSeconds(SecondsBetweenCharacters);
-            //TODO: play "single letter displayed" sound
         }
-        //TODO: play "page of text complete" sound
+        PlaySound(MessageCompleteSound);
+    }
+
+    /// <summary>
+    /// Plays the given audio clip using the attached audio source.
+    /// </summary>
+    private void PlaySound(AudioClip sound)
+    {
+        if (sound == null) return;
+        audioSource.clip = sound;
+        audioSource.Play();
     }
 
     /// <summary>
