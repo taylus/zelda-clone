@@ -15,6 +15,9 @@ public class DialogueSystem : MonoBehaviour
     //attached AudioSource for playing sound effects
     private AudioSource audioSource;
 
+    //display characters faster when holding the interact button down
+    private float secondsBetweenCharacters;
+
     [Tooltip("A UI image component to show/hide underneath the text.")]
     public GameObject MessageBoxImageComponent;
 
@@ -22,13 +25,16 @@ public class DialogueSystem : MonoBehaviour
     //public List<string> Messages;
 
     [Tooltip("How long to wait in between displaying individual characters.")]
-    public float SecondsBetweenCharacters = 0.1f;
+    public float DefaultSecondsBetweenCharacters = 0.08f;
 
     [Tooltip("Sound to play when each character of the message is displayed.")]
     public AudioClip CharacterShownSound;
 
     [Tooltip("Sound to play when the entire message is displayed.")]
     public AudioClip MessageCompleteSound;
+
+    [HideInInspector]
+    public bool DonePrintingMessage = true;
 
     public bool Visible => MessageBoxImageComponent.activeInHierarchy;
 
@@ -37,12 +43,25 @@ public class DialogueSystem : MonoBehaviour
         textComponent = GetComponent<Text>();
         textComponent.text = "";
         audioSource = GetComponent<AudioSource>();
+        secondsBetweenCharacters = DefaultSecondsBetweenCharacters;
     }
 
     public void Show(string stringToDisplay)
     {
+        DonePrintingMessage = false;
         MessageBoxImageComponent.SetActive(true);
         StartCoroutine(DisplayCharacters(UnescapeNewlines(stringToDisplay)));
+    }
+
+    public void SpeedUp(float factor = 2)
+    {
+        if (factor <= 0) factor = float.MinValue;
+        secondsBetweenCharacters /= factor;
+    }
+
+    public void SlowDown()
+    {
+        secondsBetweenCharacters = DefaultSecondsBetweenCharacters;
     }
 
     public void Hide()
@@ -64,9 +83,10 @@ public class DialogueSystem : MonoBehaviour
                 PlaySound(CharacterShownSound);
             }
             textComponent.text += c;
-            yield return new WaitForSeconds(SecondsBetweenCharacters);
+            yield return new WaitForSeconds(secondsBetweenCharacters);
         }
         PlaySound(MessageCompleteSound);
+        DonePrintingMessage = true;
     }
 
     /// <summary>

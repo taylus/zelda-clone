@@ -11440,10 +11440,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MessageBoxImageComponent: {fileID: 913417006}
-  SecondsBetweenCharacters: 0.075
+  DefaultSecondsBetweenCharacters: 0.08
   CharacterShownSound: {fileID: 8300000, guid: 2138dfe4ea6733343b09912826e66584, type: 3}
   MessageCompleteSound: {fileID: 8300000, guid: d8b865a08fbe4a5449e0535c468a6314,
     type: 3}
+  DonePrintingMessage: 1
 --- !u!82 &1369759302
 AudioSource:
   m_ObjectHideFlags: 0
