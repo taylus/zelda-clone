@@ -6,23 +6,17 @@ using UnityEngine.UI;
 /// Manages the game's message/dialogue system so that individual scripts for
 /// things like signs, NPCs, etc don't have to concern themselves with UI elements.
 /// </summary>
-[RequireComponent(typeof(Text), typeof(AudioSource))]
+[RequireComponent(typeof(Text))]
 public class DialogueSystem : MonoBehaviour
 {
     //the UI text component this script should be placed on
     private Text textComponent;
-
-    //attached AudioSource for playing sound effects
-    private AudioSource audioSource;
 
     //display characters faster when holding the interact button down
     private float secondsBetweenCharacters;
 
     [Tooltip("A UI image component to show/hide underneath the text.")]
     public GameObject MessageBoxImageComponent;
-
-    //[Tooltip("The page(s) of text currently being displayed.")]
-    //public List<string> Messages;
 
     [Tooltip("How long to wait in between displaying individual characters.")]
     public float DefaultSecondsBetweenCharacters = 0.08f;
@@ -42,7 +36,6 @@ public class DialogueSystem : MonoBehaviour
     {
         textComponent = GetComponent<Text>();
         textComponent.text = "";
-        audioSource = GetComponent<AudioSource>();
         secondsBetweenCharacters = DefaultSecondsBetweenCharacters;
     }
 
@@ -90,13 +83,13 @@ public class DialogueSystem : MonoBehaviour
     }
 
     /// <summary>
-    /// Plays the given audio clip using the attached audio source.
+    /// Plays the given audio clip at the given volume using a dynamically-created-and-disposed AudioSource.
     /// </summary>
-    private void PlaySound(AudioClip sound)
+    private static void PlaySound(AudioClip sound, float volume = 0.5f)
     {
-        if (sound == null) return;
-        audioSource.clip = sound;
-        audioSource.Play();
+        //finish playing the sound even after this script's game object is deactivated
+        //https://answers.unity.com/questions/17856/sound-stops-when-object-is-destroyed.html
+        AudioSource.PlayClipAtPoint(sound, Camera.main.transform.position, volume);
     }
 
     /// <summary>

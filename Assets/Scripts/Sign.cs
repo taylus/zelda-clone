@@ -1,18 +1,21 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// An intractable sign the player can read if standing within its trigger.
 /// </summary>
 public class Sign : MonoBehaviour
 {
-    [Tooltip("The string of text to display.")]
-    public string Message;
+    [Tooltip("The string(s) of text to display.")]
+    public List<string> Messages;
 
     [Tooltip("The DialogueSystem script to use for displaying text.")]
     public DialogueSystem DialogueSystem;
 
     private PlayerMovement player;
     private bool playerInRange;
+    private int currentMessageIndex = 0;
+    private bool HaveMoreMessages => currentMessageIndex < Messages.Count - 1;
 
     public void Update()
     {
@@ -22,13 +25,18 @@ public class Sign : MonoBehaviour
         {
             if (!DialogueSystem.Visible && player.CurrentState == PlayerState.Walking)
             {
-                DialogueSystem.Show(Message);
+                currentMessageIndex = 0;
+                DialogueSystem.Show(Messages[currentMessageIndex]);
                 player.CurrentState = PlayerState.Interacting;
                 player.StopAnimations();
             }
             else if (!DialogueSystem.DonePrintingMessage)
             {
                 DialogueSystem.SpeedUp();
+            }
+            else if (HaveMoreMessages)
+            {
+                DialogueSystem.Show(Messages[++currentMessageIndex]);
             }
             else
             {
