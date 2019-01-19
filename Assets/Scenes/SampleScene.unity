@@ -11328,6 +11328,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1059572665, guid: 588b74e896cfba248a44dd6c6263adeb, type: 3}
+      propertyPath: SwordSwings.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1059572665, guid: 588b74e896cfba248a44dd6c6263adeb, type: 3}
       propertyPath: Speed
       value: 4
       objectReference: {fileID: 0}
@@ -11335,10 +11339,36 @@ PrefabInstance:
       propertyPath: MovementSpeed
       value: 3.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1059572665, guid: 588b74e896cfba248a44dd6c6263adeb, type: 3}
+      propertyPath: SwordSwings.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8d9b75c6c0d8aac49b67b94d74638e03, type: 3}
+    - target: {fileID: 1059572665, guid: 588b74e896cfba248a44dd6c6263adeb, type: 3}
+      propertyPath: SwordSwings.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: cd6c6e4b5d0f867429fe168fd8da266a, type: 3}
+    - target: {fileID: 1059572665, guid: 588b74e896cfba248a44dd6c6263adeb, type: 3}
+      propertyPath: SwordSwings.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7ee29e4001a2ec74da31693879fec3bd, type: 3}
+    - target: {fileID: 1059572665, guid: 588b74e896cfba248a44dd6c6263adeb, type: 3}
+      propertyPath: SwordSwings.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 95052201100970b4e97e535bd33821ca, type: 3}
     - target: {fileID: 8047583684700463953, guid: 588b74e896cfba248a44dd6c6263adeb,
         type: 3}
       propertyPath: m_Size.x
       value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8047583684700463953, guid: 588b74e896cfba248a44dd6c6263adeb,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.8125
+      objectReference: {fileID: 0}
+    - target: {fileID: 8047583684700463953, guid: 588b74e896cfba248a44dd6c6263adeb,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 588b74e896cfba248a44dd6c6263adeb, type: 3}

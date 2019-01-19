@@ -73,23 +73,13 @@ public class DialogueSystem : MonoBehaviour
         {
             if (!char.IsWhiteSpace(c))
             {
-                PlaySound(CharacterShownSound);
+                AudioSource.PlayClipAtPoint(CharacterShownSound, Camera.main.transform.position, 0.5f);
             }
             textComponent.text += c;
             yield return new WaitForSeconds(secondsBetweenCharacters);
         }
-        PlaySound(MessageCompleteSound);
+        AudioSource.PlayClipAtPoint(MessageCompleteSound, Camera.main.transform.position, 0.5f);
         DonePrintingMessage = true;
-    }
-
-    /// <summary>
-    /// Plays the given audio clip at the given volume using a dynamically-created-and-disposed AudioSource.
-    /// </summary>
-    private static void PlaySound(AudioClip sound, float volume = 0.5f)
-    {
-        //finish playing the sound even after this script's game object is deactivated
-        //https://answers.unity.com/questions/17856/sound-stops-when-object-is-destroyed.html
-        AudioSource.PlayClipAtPoint(sound, Camera.main.transform.position, volume);
     }
 
     /// <summary>

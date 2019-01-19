@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -41,13 +42,19 @@ public class Sign : MonoBehaviour
             else
             {
                 DialogueSystem.Hide();
-                player.CurrentState = PlayerState.Walking;
+                StartCoroutine(ReleasePlayerAtEndOfFrame()); //prevent sword swing
             }
         }
         else if (Input.GetButtonUp("Submit"))
         {
             DialogueSystem.SlowDown();
         }
+    }
+
+    private IEnumerator ReleasePlayerAtEndOfFrame()
+    {
+        yield return new WaitForEndOfFrame();
+        player.CurrentState = PlayerState.Walking;
     }
 
     public void OnTriggerEnter2D(Collider2D other)
