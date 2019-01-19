@@ -38,7 +38,9 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("MoveX", movement.x);
             animator.SetFloat("MoveY", movement.y);
             animator.SetBool("IsMoving", true);
-            body.MovePosition(transform.position + movement * MovementSpeed * Time.fixedDeltaTime);
+
+            Vector2 newPosition = transform.position + (movement * MovementSpeed * Time.fixedDeltaTime);
+            body.MovePosition(Util.PixelClamp(newPosition));
         }
         else
         {
