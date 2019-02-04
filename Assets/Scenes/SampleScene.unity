@@ -11843,5 +11843,15 @@ PrefabInstance:
       propertyPath: Messages.Array.data[1]
       value: (This sign paid for by the Hyrule Merchant's\nAssociation.)
       objectReference: {fileID: 0}
+    - target: {fileID: 9050697951233084991, guid: c5fdc67fef47f5d479924a80113647f3,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9050697951233084991, guid: c5fdc67fef47f5d479924a80113647f3,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5fdc67fef47f5d479924a80113647f3, type: 3}
